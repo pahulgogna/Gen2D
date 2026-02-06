@@ -1,0 +1,1 @@
+{"root":["./src/index.ts","./src/types.ts","./src/auth/auth.ts","./src/config/config.ts","./src/database/database.ts","./src/services/chat.ts","./src/services/user.ts","./src/utils/utils.ts","./src/utils/validations.ts"],"version":"5.7.3"}
