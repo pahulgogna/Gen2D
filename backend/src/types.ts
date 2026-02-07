@@ -5,5 +5,9 @@ interface JwtUserPayload {
     email: string
 }
 
+export interface Message {
+    role: string,
+    content: string
+}
 
 export { ChatRole, JwtUserPayload };
