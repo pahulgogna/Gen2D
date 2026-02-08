@@ -1,11 +1,11 @@
 import express from "express";
 import {
+  RenderVideoFromCodeAndStoreInCloudinary,
   SendJsonError,
   SendJsonResponse,
   SetStreamHeaders,
 } from "../utils/utils";
 import { ChatModel, MessageModel } from "../database/database";
-import { Env } from "../config/config";
 import { JwtUserPayload, Message } from "../types";
 import { JwtVerificationMiddleware } from "../auth/auth";
 import { StoreMessageRequest } from "../utils/validations";
@@ -118,6 +118,11 @@ chatRouter.get("/stream/{*chatId}", async (req, res) => {
       chat: chatId,
     });
 
+    if (messages.length && messages[messages.length - 1].role != "user") {
+      SendJsonError(res, 400, "no message to stream");
+      return;
+    }
+
     SetStreamHeaders(res);
 
     let sendMessages: Message[] = messages
@@ -133,24 +138,81 @@ chatRouter.get("/stream/{*chatId}", async (req, res) => {
 
     let generator = sendRequestGemini(sendMessages);
 
-    let llmResponse = ""
+    let llmResponse = "";
 
     for await (let chunk of generator) {
-      llmResponse += chunk
+      llmResponse += chunk;
       res.write(`data: ${chunk}\n\n`);
     }
 
     await MessageModel.create({
       content: llmResponse,
       role: "assistant",
-      chat: chatId
-    })
-
+      chat: chatId,
+    });
   } catch (e) {
     SendJsonError(res, 500, "Internal server error");
   } finally {
     res.end();
   }
+});
+
+chatRouter.get("/video/{*messageId}", async (req, res) => {
+  let messageId = req.params.messageId ? req.params.messageId[0] : "";
+  if (!messageId) {
+    SendJsonError(res, 400, "bad request");
+    return;
+  }
+
+  let message = await MessageModel.findById(messageId);
+
+  if (!message) {
+    SendJsonError(res, 404, "not found");
+    return;
+  }
+
+  if (message?.role != "assistant") {
+    SendJsonError(res, 400, "bad request");
+    return;
+  }
+
+  let code = message?.content?.trim() || "";
+  if (!code || !code.includes("from manim import *")) {
+    SendJsonError(res, 400, "bad request");
+    return;
+  }
+
+  if (message.assets.length != 0) {
+    SendJsonError(res, 400, "assets already generated");
+    return;
+  }
+
+  let cmdRes = await RenderVideoFromCodeAndStoreInCloudinary(code, messageId);
+
+  if (!cmdRes) {
+    SendJsonError(res, 500, "internal server error");
+    return;
+  }
+
+  let outputSplit = cmdRes.split("=============");
+
+  let videoIds = outputSplit[outputSplit.length - 1]
+    .split(",")
+    .filter((m) => {
+      if (m) return true;
+      return false;
+    })
+    .map((v) => {
+      return v.trim();
+    });
+
+  let newMessage = await MessageModel.findByIdAndUpdate(messageId, {
+    assets: videoIds.map((v) => {
+      return v.trim();
+    }),
+  });
+
+  SendJsonResponse(res, 200, newMessage);
 });
 
 chatRouter.get("/{*chatId}", async (req, res) => {
