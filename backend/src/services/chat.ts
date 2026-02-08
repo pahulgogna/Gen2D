@@ -212,6 +212,8 @@ chatRouter.get("/video/{*messageId}", async (req, res) => {
     }),
   });
 
+  newMessage?.assets.concat(videoIds)
+
   SendJsonResponse(res, 200, newMessage);
 });
 
