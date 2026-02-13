@@ -1,0 +1,7 @@
+services:
+  mongo-db:
+    image: mongo
+    ports:
+      - 27017:27017
+    volumes:
+      - /home/master/.mongodb_docker:/data/db
