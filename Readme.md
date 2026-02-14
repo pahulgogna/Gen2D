@@ -13,10 +13,7 @@ Gen2D is a full-stack application that combines an interactive chat interface wi
 
 ## Tech Stack
 
-### Frontend
-- Next.js 16
-
-### Backend
+- **Next.js** - full-stack web application
 - **Python** - Video generation backend
 - **Manim** - Mathematical animation engine
 - **Cloudinary** - Cloud storage for generated videos
