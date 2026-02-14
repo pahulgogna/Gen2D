@@ -18,7 +18,7 @@ Gen2D is a full-stack application that combines an interactive chat interface wi
 - **Manim** - Mathematical animation engine
 - **Cloudinary** - Cloud storage for generated videos
 
-### Database & Infrastructure
+### Database
 - **MongoDB** - Document database for user data and chat history
 
 ## Project Structure
