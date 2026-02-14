@@ -16,13 +16,13 @@ export default function ({ user }: { user: JwtUserPayload }) {
                 <span className="font-medium text-body uppercase">{user.email[0]}</span>
             </div>
         </div>
-        <Modal open={open} onClose={async () => { }}>
+        <Modal className="top-15 right-5 justify-self-end" open={open} onClose={async () => { }}>
             <div className="flex flex-col gap-2">
                 Email: {user.email}
                 <button onClick={() => {
                     Logout()
                     redirect("/auth/signin")
-                }} className="bg-red-500 rounded py-1 hover:cursor-pointer mt-4">
+                }} className="bg-red-800 hover:bg-red-900 rounded py-1 hover:cursor-pointer mt-4">
                     Logout
                 </button>
             </div>

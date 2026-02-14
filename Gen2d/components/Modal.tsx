@@ -1,16 +1,17 @@
 
 import React from "react";
 
-export default function Modal({ open, onClose, children }: {
+export default function Modal({ open, onClose, children, className }: {
     open: boolean,
-    onClose: () => Promise<undefined>,
-    children: React.ReactNode
+    onClose?: () => Promise<undefined>,
+    children: React.ReactNode,
+    className?: string
 }) {
     if (!open) return null;
 
     return (
         <div
-            className="fixed inset-0 z-50 flex w-fit h-fit rounded-2xl justify-self-end top-15 right-5 bg-black"
+            className={"fixed inset-0 -scale-z-200 flex w-fit h-fit rounded-2xl bg-black " + className}
             onClick={onClose}
         >
             <div

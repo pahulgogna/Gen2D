@@ -31,11 +31,13 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <div className="p-4 py-5 flex justify-between  border-b text-xl font-bold">
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-auto`}>
+        <div className="p-4 py-5 flex justify-between border-b border-slate-800 text-xl font-bold fixed w-screen bg-black">
+          <div className="flex flex-col justify-center h-full">
             <Link href={"/c"} className="">
-          <Logo/>
+              <Logo />
             </Link>
+          </div>
           <div className="flex flex-col justify-center h-fit">
             {
               user
@@ -44,7 +46,9 @@ export default async function RootLayout({
             }
           </div>
         </div>
-        {children}
+        <div className="pt-22">
+          {children}
+        </div>
       </body>
     </html>
   );
