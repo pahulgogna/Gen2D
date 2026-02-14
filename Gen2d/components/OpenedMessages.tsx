@@ -125,7 +125,7 @@ export default function OpenedMessages(
         } finally {
             setSendingVideoRequest(false)
             setMessages(m => [...m, {
-                content: "",
+                content: result.response,
                 role: "assistant",
                 id: result.messageId,
                 assets: videoResponse.assets ?? [],
@@ -163,19 +163,19 @@ export default function OpenedMessages(
                 }
                 {
                     (sendingVideoRequest
-                    ? null : messages.length
+                        ? null : messages.length
                         && (messages[messages.length - 1].assets.length == 0)
                         && messages[messages.length - 1].role == "assistant"
                         && messages[messages.length - 1].content.includes("from manim import *"))
-                        ? <p>an error was encountered while generating the video.
+                        ? <div>an error was encountered while generating the video.
                             <div className="text-blue-600 hover:cursor-pointer" onClick={() => handleTryVideoAgain(messages[messages.length - 1].id)}>
                                 try again
                             </div>
-                        </p>
+                        </div>
                         : null
                 }
             </div>
-            <InputBox disabled={sendingMessageRequest} onMessageSent={onMessageSent} />
+            <InputBox disabled={sendingMessageRequest || sendingVideoRequest} onMessageSent={onMessageSent} />
         </div>
     )
 }

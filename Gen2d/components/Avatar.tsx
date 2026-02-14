@@ -1,7 +1,7 @@
 "use client"
 
 import { JwtUserPayload } from "@/lib/types"
-import { useState } from "react"
+import { use, useState } from "react"
 import Modal from "./Modal"
 import { Logout } from "@/app/actions/user"
 import { redirect } from "next/navigation"
@@ -12,7 +12,9 @@ export default function ({ user }: { user: JwtUserPayload }) {
 
     return <div className="font-bold text-xl z-50">
         <div onClick={() => setOpen(o => !o)} className="hover:cursor-pointer p-1">
-            {user.email[0]}
+            <div className="relative inline-flex items-center border justify-center w-10 h-10 overflow-hidden bg-neutral-tertiary rounded-full">
+                <span className="font-medium text-body uppercase">{user.email[0]}</span>
+            </div>
         </div>
         <Modal open={open} onClose={async () => { }}>
             <div className="flex flex-col gap-2">

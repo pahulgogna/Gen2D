@@ -2,14 +2,16 @@
 import { Login } from "@/app/actions/user"
 import Link from "next/link"
 import { useActionState } from "react"
+import Logo from "./Logo"
 
 export default function Signin() {
 
     const [error, action, isLoading] = useActionState(Login, "init")
 
     return (
-        <div className="flex overflow-y-auto overflow-x-hidden justify-center items-center w-full h-screen">
-            <div className="relative p-4 w-full max-w-md max-h-full">
+        <div className="flex overflow-y-auto overflow-x-hidden justify-center items-center w-full h-full">
+            <div className="relative h-full p-4 w-full max-w-md max-h-full flex flex-col gap-20">
+                <Logo className="text-8xl mt-20" size={85} />
                 <div className="relative bg-neutral-primary-soft border border-default rounded-base shadow-sm p-4 md:p-6">
                     <div className="flex items-center justify-between border-b border-default pb-4 md:pb-5">
                         <h3 className="text-lg font-medium text-heading">

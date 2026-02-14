@@ -4,6 +4,7 @@ import { SignupUser } from "@/app/actions/user";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useActionState, useEffect } from "react";
+import Logo from "./Logo";
 
 export default function Signup() {
 
@@ -18,8 +19,9 @@ export default function Signup() {
     }, [isLoading])
 
     return (
-        <div className="flex overflow-y-auto overflow-x-hidden justify-center items-center w-full h-screen">
-            <div className="relative p-4 w-full max-w-md max-h-full">
+        <div className="flex overflow-y-auto overflow-x-hidden justify-center items-center w-full h-full">
+            <div className="relative p-4 w-full max-w-md max-h-full flex flex-col gap-20">
+                <Logo className="text-8xl mt-20" size={85} />
                 <div className="relative bg-neutral-primary-soft border border-default rounded-md shadow-sm p-4 md:p-6">
                     <div className="flex items-center justify-between border-b border-default pb-4 md:pb-5">
                         <h3 className="text-2xl font-bold text-heading">

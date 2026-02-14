@@ -10,7 +10,7 @@ export default function Modal({ open, onClose, children }: {
 
     return (
         <div
-            className="fixed inset-0 z-50 flex w-fit h-fit rounded-2xl justify-self-end top-15 right-5 bg-black/20"
+            className="fixed inset-0 z-50 flex w-fit h-fit rounded-2xl justify-self-end top-15 right-5 bg-black"
             onClick={onClose}
         >
             <div

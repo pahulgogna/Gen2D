@@ -4,7 +4,7 @@ import "./globals.css";
 import { verifyJWT } from "./actions/auth/auth";
 import Link from "next/link";
 import Avatar from "@/components/Avatar";
-import { GetUser } from "./actions/user";
+import Logo from "@/components/Logo";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,14 +33,14 @@ export default async function RootLayout({
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <div className="p-4 py-5 flex justify-between  border-b text-xl font-bold">
-          <Link href={"/"}>
-            Gen2D
-          </Link>
-          <div>
+            <Link href={"/c"} className="">
+          <Logo/>
+            </Link>
+          <div className="flex flex-col justify-center h-fit">
             {
               user
               &&
-              <Avatar user={user}/>
+              <Avatar user={user} />
             }
           </div>
         </div>

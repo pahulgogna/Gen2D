@@ -49,13 +49,13 @@ function InputBox({
                     onChange={(e) => setMessage(e.target.value)}
                     rows={1}
                     placeholder="Message..."
-                    className="flex-1 h-full bg-neutral-800 rounded-xl p-3 resize-none outline-none text-sm placeholder-neutral-400 max-h-40 overflow-y-auto"
+                    className="flex-1 h-full bg-neutral-900 rounded-xl p-3 resize-none outline-none text-sm placeholder-neutral-400 max-h-40 overflow-y-auto"
                 />
                 <button
                     disabled={disabled}
                     type="button"
                     onClick={handleSubmit}
-                    className=" hover:cursor-pointer hover:bg-neutral-700 bg-neutral-600 end-1.5 bottom-1.5 text-white strong border border-transparent shadow-xs font-medium leading-5 rounded-2xl text-xs p-3 focus:outline-none"
+                    className=" hover:cursor-pointer hover:bg-neutral-900 bg-neutral-800 end-1.5 bottom-1.5 text-white strong border border-transparent shadow-xs font-medium leading-5 rounded-2xl text-xs p-3 focus:outline-none"
                 >
                     {disabled ? <Loader className="animate-spin"/> : "ask"}
                 </button>

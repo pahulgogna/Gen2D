@@ -1,6 +1,9 @@
+import Logo from "@/components/Logo";
 import Signin from "@/components/Signin";
 
 
 export default function () {
-    return <Signin/>
+    return <div>
+        <Signin />
+    </div>
 }
