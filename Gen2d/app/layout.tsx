@@ -17,6 +17,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  
   title: "Gen2D",
   description: "2D video generator",
 };
