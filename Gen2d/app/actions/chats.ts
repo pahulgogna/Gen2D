@@ -133,7 +133,7 @@ export async function SendMessage(
 }
 
 export async function GenerateLLMResponse(chatId: string) {
-  console.log("from GenerateLLMResponse Action: chatId: " + chatId);
+  // console.log("from GenerateLLMResponse Action: chatId: " + chatId);
 
   if (!chatId) {
     return { error: "no chat id found" };

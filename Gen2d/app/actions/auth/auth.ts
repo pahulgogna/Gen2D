@@ -1,3 +1,5 @@
+"use server"
+
 import jwt from "jsonwebtoken";
 import { JwtUserPayload } from "@/lib/types";
 import { Env } from "@/lib/config";

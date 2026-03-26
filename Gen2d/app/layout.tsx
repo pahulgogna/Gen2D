@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  
+
   title: "Gen2D",
   description: "2D video generator",
 };
@@ -35,15 +35,19 @@ export default async function RootLayout({
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-auto`}>
         <div className="p-4 py-5 flex justify-between border-b border-slate-800 text-xl font-bold fixed w-screen bg-black">
           <div className="flex flex-col justify-center h-full">
-            <Link href={"/c"} className="">
+            <Link href={"/"} className="">
               <Logo />
             </Link>
           </div>
           <div className="flex flex-col justify-center h-fit">
             {
-              user
-              &&
-              <Avatar user={user} />
+              !!user
+                ?
+                <Avatar user={user} />
+                :
+                <Link href={"/auth/signin"} className="font-light underline">
+                  Get Started
+                </Link>
             }
           </div>
         </div>
